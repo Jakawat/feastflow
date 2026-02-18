@@ -2,14 +2,6 @@
 -- FEASTFLOW DATABASE SCHEMA WITH AUTHENTICATION
 -- Restaurant Management System
 -- ============================================
-
--- Drop existing tables if they exist
-DROP TABLE IF EXISTS order_items CASCADE;
-DROP TABLE IF EXISTS orders CASCADE;
-DROP TABLE IF EXISTS menu_items CASCADE;
-DROP TABLE IF EXISTS categories CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-
 -- ============================================
 -- TABLE 1: Users (Authentication)
 -- Stores user login credentials
@@ -23,12 +15,10 @@ CREATE TABLE users (
 );
 
 -- Insert default users (password for both is: password123)
--- In production, these should be hashed!
 INSERT INTO users (username, password, role) VALUES 
     ('admin', '$2a$10$rX5X8z8vY.5yY5.yY5.yY.OqKqKqKqKqKqKqKqKqKqKqKqKqKqKq', 'admin'),
     ('kitchen', '$2a$10$rX5X8z8vY.5yY5.yY5.yY.OqKqKqKqKqKqKqKqKqKqKqKqKqKqKq', 'kitchen');
 
--- For now, let's use plain text for easier testing (CHANGE LATER!)
 UPDATE users SET password = 'admin123' WHERE username = 'admin';
 UPDATE users SET password = 'kitchen123' WHERE username = 'kitchen';
 
@@ -130,12 +120,3 @@ CREATE TRIGGER update_orders_updated_at
     BEFORE UPDATE ON orders
     FOR EACH ROW
     EXECUTE FUNCTION update_updated_at_column();
-
--- ============================================
--- DEFAULT CREDENTIALS (FOR TESTING)
--- ============================================
--- Username: admin    | Password: admin123    | Role: Admin
--- Username: kitchen  | Password: kitchen123  | Role: Kitchen Staff
--- 
--- NOTE: In production, use hashed passwords!
--- ============================================

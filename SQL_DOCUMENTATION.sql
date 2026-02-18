@@ -1,9 +1,4 @@
 -- ============================================
--- FEASTFLOW - SQL DOCUMENTATION
--- Complete SQL Scripts for Final Submission
--- ============================================
-
--- ============================================
 -- SECTION 1: DATABASE CREATION
 -- ============================================
 
@@ -446,7 +441,3 @@ SELECT o.order_id, o.table_number, o.total_amount
 FROM orders o
 LEFT JOIN order_items oi ON o.order_id = oi.order_id
 WHERE oi.order_item_id IS NULL;
-
--- ============================================
--- END OF SQL DOCUMENTATION
--- ============================================
